@@ -1,0 +1,118 @@
+syntax = "proto3";
+package quicksave;
+
+option csharp_namespace = "BluePrince.Modding.QuickSave";
+
+import "google/protobuf/timestamp.proto";
+
+message SaveState {
+  Layout layout = 1;
+  Inventory inventory = 2;
+  Player player = 3;
+  google.protobuf.Timestamp timestamp = 4;
+  int32 profile_slot = 5;
+  int32 current_day = 6;
+  repeated RoomPuzzleState puzzle_states = 7;
+  repeated PickupItemState pickup_items = 8;
+}
+
+message PickupItemState {
+  string name = 1;
+  Vector3 position = 2;
+  Vector3 rotation = 3;
+}
+
+message RoomPuzzleState {
+  string room_name = 1;
+  oneof state {
+    ParlorState parlor = 2;
+    BilliardState billiard = 3;
+  }
+}
+
+message ParlorState {
+  bool blue_box_unlocked = 1;
+  bool black_box_unlocked = 2;
+  bool white_box_unlocked = 3;
+  int32 solution = 4;
+  bool correct = 5;
+}
+
+message BilliardState {
+  // Placeholder for Billiard room state
+}
+
+message Vector3 {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message Player {
+  Vector3 position = 1;
+  float rotation_y = 2;
+}
+
+message Layout {
+  string outer_room_name = 1;
+  repeated Room rooms = 2;
+  repeated string draft_order = 3;
+}
+
+enum Rank {
+  RANK_UNSPECIFIED = 0;
+  RANK_1 = 1;
+  RANK_2 = 2;
+  RANK_3 = 3;
+  RANK_4 = 4;
+  RANK_5 = 5;
+  RANK_6 = 6;
+  RANK_7 = 7;
+  RANK_8 = 8;
+  RANK_9 = 9;
+}
+
+enum Column {
+  COLUMN_UNSPECIFIED = 0;
+  COLUMN_A = 1;
+  COLUMN_B = 2;
+  COLUMN_C = 3;
+  COLUMN_D = 4;
+  COLUMN_E = 5;
+}
+
+enum Rotation {
+  ROTATE_0 = 0;
+  ROTATE_90 = 1;
+  ROTATE_180 = 2;
+  ROTATE_270 = 3;
+}
+
+message Room {
+  string name = 1;
+  Column column = 2;
+  Rank rank = 3;
+  Rotation rotation = 5;
+  string room_engine_name = 6;
+}
+
+message Item {
+  string name = 1;
+  int32 count = 2;
+}
+
+message Inventory {
+  int32 steps = 1;
+  int32 keys = 2;
+  int32 gems = 3;
+  int32 gold = 4;
+  int32 dice = 5;
+  int32 stars = 6;
+  repeated string picked_up_items = 7;
+  repeated string pre_spawn_items = 8;
+  repeated string estate_items = 9;
+  repeated string coat_check_items = 10;
+  repeated string used_items = 11;
+  repeated string combined_items = 12;
+  repeated string temp_array_items = 13;
+}
