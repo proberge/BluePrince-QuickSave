@@ -24,7 +24,7 @@ The code is a bit messy but should be self-explanatory; we poke at things in the
 
 The likely most interesting logic is in `FsmHookManager` - it allows us to hook into the game's FSMs and execute code when certain events are triggered, for example when the player enters a room or interacts with an object. See `Core.cs`' `OnSceneWasInitialized` method for an example: we initiate a Coroutine (to perform the quick-load) once the `DAY`'s FSM reaches a state where the player is about to get control of their character.
 
-Other mod developers may also be interested in the `FsmLoggingManager`, which can be used to log (to the console, in real time) all state transitions and actions of a specific FSM to see how it interacts with other objects. This was used in conjunction with [PlayMakerDocumenter](https://github.com/markekraus/PlayMakerDocumenter) to learn about the game's FSMs. See the example scripts in the `DebugUtils` folder for usage examples.
+Other mod developers may also be interested in the `FsmLoggingManager`, which can be used to log (to the console, in real time) all state transitions and actions of a specific FSM to see how it interacts with other objects. This was used in conjunction with [PlayMakerDocumenter](https://github.com/markekraus/PlayMakerDocumenter) to learn about the game's FSMs. See the example scripts in the `FsmLoggingManagerExamples` folder for usage examples.
 
 ## Installation
 
